@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111425">
+  <meta name="description" content="Nigeria gork — your cinematic AI creative studio prototype.">
+  <title>Nigeria gork — AI Studio</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark" aria-hidden="true">✦</div>
+    <div class="brand-copy"><h1>Nigeria gork</h1><p>AI CREATIVE STUDIO</p></div>
+    <span class="status-pill"><span class="status-dot"></span> Prototype</span>
+  </header>
+
+  <main class="shell">
+    <section class="hero panel">
+      <div class="eyebrow">YOUR NEXT CREATION</div>
+      <h2>Imagine it.<br><span>Create it.</span></h2>
+      <p>Plan cinematic videos from text and reference images. Real generation will be enabled after a secure backend is connected.</p>
+      <div class="hero-art" role="img" aria-label="Abstract purple and blue cinematic gradient artwork">
+        <div class="orb orb-one"></div><div class="orb orb-two"></div><div class="hero-grid"></div>
+        <div class="hero-art-caption"><span>NG</span><span>STUDIO / 001</span></div>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="Creation mode">
+      <button class="tab active" data-mode="video" type="button">▣ <span>Video</span></button>
+      <button class="tab" data-mode="image" type="button">▧ <span>Image</span></button>
+      <button class="tab" data-mode="voice" type="button">♫ <span>Voice</span></button>
+    </nav>
+
+    <section class="panel form-panel">
+      <div class="section-heading"><div><div class="eyebrow">CREATION WORKSPACE</div><h2 id="modeTitle">Create a cinematic video</h2></div><span class="step-number">01</span></div>
+      <form id="creationForm">
+        <label for="prompt">Describe your idea</label>
+        <textarea id="prompt" rows="5" placeholder="Example: A cinematic aerial shot of Lagos at sunset, yellow danfo buses moving through the streets, warm golden light, smooth camera movement..." required></textarea>
+        <label for="referenceImage">Reference image <span class="optional">Optional</span></label>
+        <div class="upload-box" id="uploadBox">
+          <input id="referenceImage" type="file" accept="image/*" hidden>
+          <div class="upload-icon">＋</div>
+          <div class="upload-copy"><strong>Choose an image</strong><span>JPG, PNG or WebP from your phone</span></div>
+          <button id="chooseImage" class="secondary-btn" type="button">Browse</button>
+        </div>
+        <div id="imagePreviewWrap" class="image-preview-wrap" hidden>
+          <img id="imagePreview" alt="Selected reference preview">
+          <div class="preview-details"><strong id="imageName">Reference image</strong><span id="imageSize"></span></div>
+          <button id="removeImage" class="icon-btn" type="button" aria-label="Remove selected image">×</button>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="language">Voiceover language</label>
+            <select id="language">
+              <option>English</option><option>Nigerian Pidgin</option><option>Yoruba</option><option>Hausa</option><option>Igbo</option><option>French</option><option>Arabic</option><option>Spanish</option><option>Hindi</option><option>Portuguese</option><option>Swahili</option><option>Other supported language</option>
+            </select>
+          </div>
+          <div class="field" id="durationField">
+            <label for="duration">Duration</label>
+            <select id="duration"><option value="5">5 seconds</option><option value="8">8 seconds</option><option value="10" selected>10 seconds</option><option value="15">15 seconds</option></select>
+          </div>
+        </div>
+        <div class="field" id="ratioField">
+          <label>Aspect ratio</label>
+          <div class="ratio-options">
+            <label class="ratio-option"><input type="radio" name="ratio" value="9:16" checked><span><b>▯</b>9:16 <small>Phone</small></span></label>
+            <label class="ratio-option"><input type="radio" name="ratio" value="16:9"><span><b>▱</b>16:9 <small>Landscape</small></span></label>
+            <label class="ratio-option"><input type="radio" name="ratio" value="1:1"><span><b>□</b>1:1 <small>Square</small></span></label>
+          </div>
+        </div>
+        <div class="toggles" id="audioOptions">
+          <label class="toggle-row"><span><strong>AI voiceover</strong><small>Generate narration if supported by the connected service</small></span><input id="voiceover" type="checkbox" checked><i></i></label>
+          <label class="toggle-row"><span><strong>Background sound</strong><small>Music and ambience, if supported</small></span><input id="sound" type="checkbox" checked><i></i></label>
+        </div>
+        <div class="prototype-notice"><span class="notice-icon">ⓘ</span><p><strong>Prototype mode</strong><br>This app currently saves a local job brief only. It does not generate AI video, images, or audio until a backend is connected.</p></div>
+        <button class="primary-btn" type="submit"><span>✦</span> Prepare creation brief <span class="arrow">→</span></button>
+      </form>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="section-heading"><div><div class="eyebrow">YOUR WORKSPACE</div><h2>Job history</h2></div><button id="clearHistory" class="text-btn" type="button">Clear all</button></div>
+      <div id="historyList" class="history-list"></div>
+      <div id="emptyHistory" class="empty-state"><div class="empty-icon">◷</div><strong>No projects yet</strong><p>Your prepared briefs will appear here on this device.</p></div>
+    </section>
+
+    <section class="panel next-panel">
+      <div class="next-icon">⌘</div><div><h3>Ready for real AI?</h3><p>Connect a secure backend and supported generation APIs when you're ready. Never put secret API keys in this app's JavaScript.</p></div>
+    </section>
+    <footer><span>NG · NIGERIA GORK</span><span>PROTOTYPE v0.1</span></footer>
+  </main>
+
+  <dialog id="jobDialog" class="job-dialog">
+    <div class="dialog-head"><div><div class="eyebrow">LOCAL JOB BRIEF</div><h2 id="dialogTitle">Creation prepared</h2></div><button id="closeDialog" class="icon-btn" aria-label="Close dialog">×</button></div>
+    <div class="prototype-banner">Prototype only · No media has been generated</div>
+    <pre id="jobBrief"></pre>
+    <div class="dialog-actions"><button id="copyBrief" class="secondary-btn" type="button">Copy brief</button><button id="doneDialog" class="primary-btn" type="button">Done</button></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
